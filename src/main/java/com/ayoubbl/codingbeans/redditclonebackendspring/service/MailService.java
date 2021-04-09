@@ -6,9 +6,10 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.mail.MailException;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import com.ayoubbl.codingbeans.redditclonebackendspring.exceptions.SendEmailException;
+import com.ayoubbl.codingbeans.redditclonebackendspring.exceptions.RedditCloneException;
 import com.ayoubbl.codingbeans.redditclonebackendspring.model.NotificationEmail;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ class MailService {
 	private final JavaMailSender mailSender;
 	private final MailContentBuilder mailContentBuilder;
 	
+	@Async
 	void sendMail(NotificationEmail notificationEmail) {
 		MimeMessagePreparator mimeMessagePreparator = (MimeMessage mimeMessage) -> {
 			mimeMessage.setFrom(notificationEmail.getNoReplaySender());
@@ -42,7 +44,7 @@ class MailService {
 		} catch (MailException e) {
 			String exMessage = "Exception occurred when sending email to " + notificationEmail.getRecipient();
 			log.error(exMessage, e);
-			throw new SendEmailException(exMessage, e);
+			throw new RedditCloneException(exMessage, e);
 		}
 	}
 	
