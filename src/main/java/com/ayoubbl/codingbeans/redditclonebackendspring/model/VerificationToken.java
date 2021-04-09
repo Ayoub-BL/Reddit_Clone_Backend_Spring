@@ -1,8 +1,10 @@
 package com.ayoubbl.codingbeans.redditclonebackendspring.model;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,17 +20,18 @@ import static javax.persistence.GenerationType.IDENTITY;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@SuppressWarnings("unused")
 public class VerificationToken {
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+	@Setter(value=AccessLevel.NONE)
 	private Long id;
-	
-	private String token;
 	
 	private Instant expiryDate;
 	
+	private String token;
+	
 	@OneToOne(fetch = LAZY)
 	private AppUser appUser;
+	
 }

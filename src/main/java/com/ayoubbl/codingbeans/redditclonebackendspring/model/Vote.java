@@ -10,20 +10,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Builder
-@SuppressWarnings("unused")
 public class Vote {
+	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
+	@Setter(value=AccessLevel.NONE)
 	private Long voteId;
 	
 	private VoteType voteType;
@@ -36,4 +39,5 @@ public class Vote {
 	@ManyToOne(fetch = LAZY)
 	@JoinColumn(name = "userId", referencedColumnName = "id")
 	private AppUser appUser;
+	
 }

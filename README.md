@@ -1,6 +1,6 @@
 # Reddit Clone
  
-| Backend project with Java-EE (Spring Boot) |
+| Backend project with J2EE (Spring Boot) |
 | ------ |
 | Auto-formation |
 | Projet `Reddit_Clone_Backend_Spring` (v.0.0.1) |
