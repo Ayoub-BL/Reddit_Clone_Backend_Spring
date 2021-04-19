@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 class MailService {
 	
-	private final JavaMailSender mailSender;
+	private final JavaMailSender javaMailSender;
 	private final MailContentBuilder mailContentBuilder;
 	
 	@Async
@@ -39,12 +39,13 @@ class MailService {
 			*/
 		};
 		try {
-			mailSender.send(mimeMessagePreparator);
-			log.info("Activation email sent!!");
+			javaMailSender.send(mimeMessagePreparator);
+			log.info("Activation email sent !");
 		} catch (MailException e) {
-			String exMessage = "Exception occurred when sending email to " + notificationEmail.getRecipient();
-			log.error(exMessage, e);
-			throw new RedditCloneException(exMessage, e);
+			String msg = "Exception occurred at " + MailService.class.getSimpleName() + ".sendMail() method!" 
+					+ " when sending email to " + notificationEmail.getRecipient() + " !";
+			log.error(msg, e);
+			throw new RedditCloneException(msg);
 		}
 	}
 	

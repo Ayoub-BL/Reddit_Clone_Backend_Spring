@@ -32,7 +32,7 @@ public class Comment {
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Setter(value=AccessLevel.NONE)
+	@Setter(value  =AccessLevel.NONE)
 	private Long id;
 	
 	@CreatedDate
@@ -42,7 +42,7 @@ public class Comment {
 	
 	@LastModifiedDate
 	@Column(name = "updated_at")
-	@Setter(value=AccessLevel.NONE)
+	@Setter(value = AccessLevel.NONE)
 	private Instant updatedAt;
 	
 	@NotEmpty

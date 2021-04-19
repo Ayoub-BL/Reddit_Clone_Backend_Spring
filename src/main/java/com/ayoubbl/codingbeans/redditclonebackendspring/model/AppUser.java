@@ -8,11 +8,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -27,34 +28,42 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(indexes = {
+        @Index(name = "uniqueUsername", columnList = "username", unique = true),
+        @Index(name = "uniqueEmail", columnList = "email", unique = true)
+      })
 public class AppUser {
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
-	@Setter(value=AccessLevel.NONE)
+	@Setter(value = AccessLevel.NONE)
 	private Long id;
 	
 	@CreatedDate
 	@Column(name = "created_at", nullable = false, updatable = false)
-	@Setter(value=AccessLevel.NONE)
+	@Setter(value = AccessLevel.NONE)
 	private Instant createdAt;
 	
 	@LastModifiedDate
-	@Column(name = "updated_at")
-	@Setter(value=AccessLevel.NONE)
+	@Column(name = "updated_at", nullable = false)
+	@Setter(value = AccessLevel.NONE)
 	private Instant updatedAt;
 	
+	@Column(nullable = false)
+	private boolean enabled;
+	
 	@NotBlank(message = "Username is required")
+	@Column(nullable = false)
 	private String username;
 	
-	@NotBlank(message = "Password is required")
-	private String password;
-	
 	@Email
-	@NotEmpty(message = "Email is required")
+	@NotBlank(message = "Email is required")
+	@Column(nullable = false)
 	private String email;
 	
-	private boolean enabled;
+	@NotBlank(message = "Password is required")
+	@Column(nullable = false)
+	private String password;
 	
 	@PrePersist
 	protected void prePersist() {
