@@ -17,12 +17,14 @@ REST API project for Spring Boot and Angular application, creating a clone of th
 - Spring Security
 - Spring JPA (Hibernate)
 - MySQL Database
-- Angular ( frontend )
-- HTML & ✨Bootstrap✨
+- Angular - HTML & ✨Bootstrap✨ ( frontend ) - coming soon...
  
 ## Installation
-First, you need to run `phpMyAdmin` (your MySQL database manager system), then run the application with Elipse IDE.
-💡 `You don't need to create the database manually, it will be created automatically` 😉
+- In this commit, I made some major changes. The application now uses JWT and it responds with the KeyStore `reddit_clone_backend_spring.jks` but this file in `.gitignore` has been ignored and, in consequence, you must add your own KeyStore to your project. So it is highly recommended that you take a look at how to create a KeyStore on [link-1] and [link-2].
+- When it is done, you can re-configure your KeyStore Alias, Password and file path in the class JwtProvider.
+- After that, you need to run `phpMyAdmin` (your MySQL database manager system), then run the application with Elipse IDE.
+💡 `You don't need to create the database manually, it will be created automatically`.
+- Enjoy 😉
 
 ## Tests - Screenshots
 #### Sign up
@@ -34,7 +36,7 @@ First, you need to run `phpMyAdmin` (your MySQL database manager system), then r
 #### Account verification with token
 <img align="center" src="screenshots/postman_account-verification.jpg" alt="Postman test - Account Verification">
 
-#### Login with response token and username
+#### Login and get response token and username
 <img align="center" src="screenshots/postman_login_response_token.jpg" alt="Postman test - Login">
 
 ## Contact
@@ -48,3 +50,7 @@ First, you need to run `phpMyAdmin` (your MySQL database manager system), then r
 [Dummy SMTP email]: <https://mailtrap.io/>
 
 [JSON Web Tokens]: <https://jwt.io/>
+
+[link-1]: <https://www.codeproject.com/Articles/1253786/Java-JWT-Token-Tutorial-using-JJWT-Library/>
+
+[link-2]: <https://knowledge.digicert.com/quovadis/ssl-certificates/ssl-general-topics/common-java-keytool-commands.html>
